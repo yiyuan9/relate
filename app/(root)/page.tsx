@@ -1,10 +1,20 @@
-import { UserButton } from "@clerk/nextjs";
+'use client'
+
+import { useEffect } from "react";
+
+import useStoreModal from "@/hooks/useStoreModal";
 
 export default function Home() {
+  const onOpen = useStoreModal((state) => state.onOpen)
+  const isOpen = useStoreModal((state) => state.isOpen)
+
+  useEffect(() => {
+    if (!isOpen) onOpen()
+  }, [isOpen, onOpen])
+
   return (
-    <>
-      <UserButton afterSignOutUrl="/" />
-      <div className="text-md">Relate CMS</div>
-    </>
+    <div className="p-4">
+      Root
+    </div>
   )
 }
